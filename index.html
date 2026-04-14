@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demo Sites Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f5;
+      --muted: #7a7a9a;
+      --accent-health: #00c9a7;
+      --accent-service: #f7b731;
+      --accent-realestate: #c084fc;
+      --accent-institution: #60a5fa;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Hero */
+    header {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    header h1 span {
+      background: linear-gradient(135deg, #00c9a7, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 300;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Stats bar */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin: 48px 0 72px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 64px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .section-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    /* Category accent colors */
+    .health .card::before { background: linear-gradient(90deg, var(--accent-health), transparent); }
+    .health .card:hover { box-shadow: 0 20px 40px rgba(0,201,167,0.1); }
+
+    .service .card::before { background: linear-gradient(90deg, var(--accent-service), transparent); }
+    .service .card:hover { box-shadow: 0 20px 40px rgba(247,183,49,0.1); }
+
+    .realestate .card::before { background: linear-gradient(90deg, var(--accent-realestate), transparent); }
+    .realestate .card:hover { box-shadow: 0 20px 40px rgba(192,132,252,0.1); }
+
+    .institution .card::before { background: linear-gradient(90deg, var(--accent-institution), transparent); }
+    .institution .card:hover { box-shadow: 0 20px 40px rgba(96,165,250,0.1); }
+
+    .card-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+
+    .card:hover .card-link { opacity: 1; }
+
+    .health .card-link { color: var(--accent-health); }
+    .service .card-link { color: var(--accent-service); }
+    .realestate .card-link { color: var(--accent-realestate); }
+    .institution .card-link { color: var(--accent-institution); }
+
+    /* Arrow */
+    .card-link::after {
+      content: '→';
+      transition: transform 0.2s;
+    }
+    .card:hover .card-link::after { transform: translateX(4px); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section { animation: fadeUp 0.5s ease both; }
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (max-width: 600px) {
+      .stats { gap: 28px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="badge">Demo Portfolio</div>
+    <h1>All Demo <span>Sites</span></h1>
+    <p>A collection of professional static websites across healthcare, services, real estate & institutions.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-number" style="color:var(--accent-health)">12</div>
+      <div class="stat-label">Total Sites</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color:var(--accent-service)">4</div>
+      <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color:var(--accent-realestate)">6</div>
+      <div class="stat-label">Pages Each</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" style="color:var(--accent-institution)">72</div>
+      <div class="stat-label">Total Pages</div>
+    </div>
+  </div>
+
+  <!-- HEALTHCARE -->
+  <div class="section health">
+    <div class="section-header">
+      <div class="section-dot" style="background:var(--accent-health)"></div>
+      <div class="section-title">Healthcare</div>
+      <div class="section-count">5 sites</div>
+    </div>
+    <div class="grid">
+      <a class="card" href="dental/index.html">
+        <div class="card-icon">🦷</div>
+        <div class="card-name">Dental Clinic</div>
+        <div class="card-desc">Teeth cleaning, braces, root canal, whitening & implants.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="ortho/index.html">
+        <div class="card-icon">🦴</div>
+        <div class="card-name">Ortho Clinic</div>
+        <div class="card-desc">Joint replacement, spine surgery & sports injury care.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="eyecare/index.html">
+        <div class="card-icon">👁️</div>
+        <div class="card-name">Eye Care</div>
+        <div class="card-desc">LASIK, cataract surgery, retina & glaucoma treatment.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="generalclinic/index.html">
+        <div class="card-icon">🏥</div>
+        <div class="card-name">General Clinic</div>
+        <div class="card-desc">General consultation, diabetes, BP & health checkups.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="physio/index.html">
+        <div class="card-icon">🧘</div>
+        <div class="card-name">Physiotherapy</div>
+        <div class="card-desc">Sports rehab, back pain, stroke rehabilitation & more.</div>
+        <div class="card-link">View Site</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section service">
+    <div class="section-header">
+      <div class="section-dot" style="background:var(--accent-service)"></div>
+      <div class="section-title">Home Services</div>
+      <div class="section-count">5 sites</div>
+    </div>
+    <div class="grid">
+      <a class="card" href="ac-repair/index.html">
+        <div class="card-icon">❄️</div>
+        <div class="card-name">AC Repair</div>
+        <div class="card-desc">Installation, servicing, gas refilling & deep cleaning.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="washingmachine/index.html">
+        <div class="card-icon">🫧</div>
+        <div class="card-name">Washing Machine Repair</div>
+        <div class="card-desc">Front load, top load, drum & motor repairs.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="plumbing/index.html">
+        <div class="card-icon">🔧</div>
+        <div class="card-name">Plumbing</div>
+        <div class="card-desc">Pipe repair, leak fixing, bathroom fitting & drainage.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="electrician/index.html">
+        <div class="card-icon">⚡</div>
+        <div class="card-name">Electrician</div>
+        <div class="card-desc">Wiring, switchboard repair, inverter & CCTV fitting.</div>
+        <div class="card-link">View Site</div>
+      </a>
+      <a class="card" href="pestcontrol/index.html">
+        <div class="card-icon">🐛</div>
+        <div class="card-name">Pest Control</div>
+        <div class="card-desc">Cockroach, termite, bed bug & rodent control.</div>
+        <div class="card-link">View Site</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- REAL ESTATE -->
+  <div class="section realestate">
+    <div class="section-header">
+      <div class="section-dot" style="background:var(--accent-realestate)"></div>
+      <div class="section-title">Real Estate</div>
+      <div class="section-count">1 site</div>
+    </div>
+    <div class="grid">
+      <a class="card" href="realestate/index.html">
+        <div class="card-icon">🏠</div>
+        <div class="card-name">Real Estate Agency</div>
+        <div class="card-desc">Buy, sell, rent, commercial properties & valuations.</div>
+        <div class="card-link">View Site</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- INSTITUTIONS -->
+  <div class="section institution">
+    <div class="section-header">
+      <div class="section-dot" style="background:var(--accent-institution)"></div>
+      <div class="section-title">Institutions</div>
+      <div class="section-count">1 site</div>
+    </div>
+    <div class="grid">
+      <a class="card" href="coaching/index.html">
+        <div class="card-icon">🎓</div>
+        <div class="card-name">Coaching Centre</div>
+        <div class="card-desc">NEET, JEE, SSC/Banking, Spoken English & Personality Dev.</div>
+        <div class="card-link">View Site</div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Demo Showcase · 12 Sites · Built with OpenCode</p>
+  </footer>
+
+</div>
+</body>
+</html>
