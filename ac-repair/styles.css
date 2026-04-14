@@ -242,13 +242,13 @@ img { max-width: 100%; height: auto; display: block; }
 .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 1024px) {
-    .features-grid, .values-grid, .cert-grid, .team-grid, .testimonials-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-grid, .values-grid, .cert-grid, .team-grid, .testimonials-grid, .pricing-grid, .services-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .service-detail-grid { grid-template-columns: 1fr; gap: 40px; }
+    .service-detail-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .service-detail-grid.reverse { direction: ltr; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     .process-grid { grid-template-columns: repeat(3, 1fr); }
-    .contact-grid { grid-template-columns: 1fr; }
+    .contact-grid, .faq-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
     .hamburger { display: flex; }
@@ -259,7 +259,7 @@ img { max-width: 100%; height: auto; display: block; }
     .nav-phone { display: none; }
     .hero-title, .page-hero-content h1 { font-size: 2.2rem; }
     .section-title { font-size: 2rem; }
-    .features-grid, .values-grid, .cert-grid, .team-grid, .testimonials-grid, .pricing-grid, .gallery-grid, .process-grid, .faq-grid { grid-template-columns: 1fr; }
+    .features-grid, .values-grid, .cert-grid, .team-grid, .testimonials-grid, .pricing-grid, .gallery-grid, .process-grid, .faq-grid, .services-grid, .about-grid, .footer-grid, .stats-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .pricing-card.featured { transform: none; }
     .stat-number { font-size: 2.5rem; }
